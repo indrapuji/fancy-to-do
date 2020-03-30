@@ -1,7 +1,34 @@
 # fancy-to-do
 Fancy To-do App is an application to manage your task. This app has :
 
-RESTful endpoint for asset's CRUD operation and JSON formatted response
+* RESTful endpoint for asset's CRUD operation 
+* JSON formatted response
 
-1. POST /todos
-Example Input (Request Body) :
+
+##RESTful endpoints
+
+**POST /todos**
+
+*Request Body :*
+
+javascript
+{
+    "email": "test@mail.com",
+    "password": "test"
+}
+
+*Response:*
+
+javascript
+{
+    "todo": {
+        "id": 4,
+        "title": "Membuat dokumentasi",
+        "description": "Membuat dokumentasi untuk Api",
+        "status": false,
+        "due_date": "2020-03-30",
+        "updatedAt": "2020-03-30T10:24:52.005Z",
+        "createdAt": "2020-03-30T10:24:52.005Z"
+    }
+}
+
