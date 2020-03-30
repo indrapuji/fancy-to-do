@@ -17,11 +17,10 @@ Fancy To-do App is an application to manage your task. This app has :
         "description": "Membuat dokumentasi untuk Api",
         "due_date": "2020-03-30",
 }
-
 ```
 
 *Response:*
-
+```
 {
     "todo": {
         "id": 4,
@@ -33,4 +32,5 @@ Fancy To-do App is an application to manage your task. This app has :
         "createdAt": "2020-03-30T10:24:52.005Z"
     }
 }
+```
 
