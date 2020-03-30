@@ -41,12 +41,47 @@ class TodoControllers {
                 res.status(201).json({ todo })
             })
             .catch(err => {
-                res.status(500).json(err)
+                if (err.errors) {
+                    let errData = []
+                    for (let i = 0; i < err.errors.length; i++) {
+                        errData.push({ message: err.errors[i].message })
+                    }
+                    res.status(400).json(errData)
+                } else {
+                    res.status(500).json(err)
+                }
             })
     }
 
     static update(req, res) {
-        
+        let option = { where: { id: req.params.id } }
+        let input = {
+            title: req.body.title,
+            description: req.body.description,
+            status: req.body.status,
+            due_date: req.body.due_date
+        }
+        Todo.update(input, option)
+            .then(todo => {
+                if (todo) {
+                    res.status(200).json(input)
+                } else {
+                    res.status(404).json({
+                        message: 'data not found'
+                    })
+                }
+            })
+            .catch(err => {
+                if (err.errors) {
+                    let errData = []
+                    for (let i = 0; i < err.errors.length; i++) {
+                        errData.push({ message: err.errors[i].message })
+                    }
+                    res.status(400).json(errData)
+                } else {
+                    res.status(500).json(err)
+                }
+            })
     }
 
     static deleteTodo(req, res) {

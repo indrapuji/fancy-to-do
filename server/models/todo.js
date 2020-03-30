@@ -8,13 +8,40 @@ module.exports = (sequelize, DataTypes) => {
 
   Todo.init(
     {
-      title: DataTypes.STRING,
-      description: DataTypes.STRING,
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'Title cannot be empty'
+          }
+        }
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'Description cannot be empty'
+          }
+        }
+      },
       status: DataTypes.BOOLEAN,
-      due_date: DataTypes.STRING
+      due_date: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: 'Due date cannot be empty'
+          }
+        }
+      }
     }, { sequelize })
-  
-  Todo.associate = function(models) {
+
+  Todo.associate = function (models) {
     // associations can be defined here
   };
   return Todo;
