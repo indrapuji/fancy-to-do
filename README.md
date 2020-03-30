@@ -11,15 +11,17 @@ Fancy To-do App is an application to manage your task. This app has :
 
 *Request Body :*
 
-javascript
+```
 {
-    "email": "test@mail.com",
-    "password": "test"
+        "title": "Membuat dokumentasi",
+        "description": "Membuat dokumentasi untuk Api",
+        "due_date": "2020-03-30",
 }
+
+```
 
 *Response:*
 
-javascript
 {
     "todo": {
         "id": 4,
