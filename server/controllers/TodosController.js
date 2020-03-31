@@ -3,7 +3,8 @@ const { Todo } = require('../models')
 class TodoControllers {
 
     static getTodos(req, res) {
-        Todo.findAll()
+        let option = { where: { userId: req.user.id } }
+        Todo.findAll(option)
             .then(todos => {
                 res.status(200).json({ todos: todos })
             })
@@ -35,7 +36,8 @@ class TodoControllers {
             title,
             description,
             status: false,
-            due_date
+            due_date,
+            userId : req.user.id
         })
             .then(todo => {
                 res.status(201).json({ todo })
@@ -60,7 +62,8 @@ class TodoControllers {
             title,
             description,
             status,
-            due_date
+            due_date,
+            userId : req.user.id
         }
         Todo.update(input, option)
             .then(todo => {

@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 module.exports = {
-    bycrpt: password => {
+    bcrypt: password => {
         return bcrypt.hash(password, saltRounds)
     },
     compare: (password, hash) => {

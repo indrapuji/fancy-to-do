@@ -12,18 +12,21 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
         validate: {
-          args: true,
-          msg: "Email cannot be empty"
+          notEmpty: {
+            args: true,
+            msg: 'Title cannot be empty'
+          }
         }
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          args: true,
-          msg: "Password cannot be empty"
+          notEmpty: {
+            args: true,
+            msg: "Password cannot be empty"
+          }
         }
       }
     }, {
