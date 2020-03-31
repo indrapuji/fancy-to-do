@@ -55,11 +55,12 @@ class TodoControllers {
 
     static update(req, res) {
         let option = { where: { id: req.params.id } }
+        const { title, description, status, due_date } = req.body
         let input = {
-            title: req.body.title,
-            description: req.body.description,
-            status: req.body.status,
-            due_date: req.body.due_date
+            title,
+            description,
+            status,
+            due_date
         }
         Todo.update(input, option)
             .then(todo => {
