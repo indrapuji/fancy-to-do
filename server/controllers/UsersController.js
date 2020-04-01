@@ -22,7 +22,7 @@ class UserController {
                 const accessToken = jwt.sign({
                     id: user.id,
                     email: user.email
-                }, 'apaajadeh')
+                }, process.env.SECRET)
                 res.status(201).json({ accessToken })
             })
             .catch(err => {
@@ -49,7 +49,7 @@ class UserController {
                         const accessToken = jwt.sign({
                             id: user.id,
                             email: user.email
-                        }, 'apaajadeh')
+                        }, process.env.SECRET)
                         console.log(accessToken);
                         res.status(201).json({ accessToken })
                     }

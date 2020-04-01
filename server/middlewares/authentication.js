@@ -8,7 +8,7 @@ const authentication = function (req, res, next) {
                 message: 'token not found'
             })
         } else {
-            const decoded = jwt.verify(token, 'apaajadeh')
+            const decoded = jwt.verify(token, process.env.SECRET)
             req.user = decoded
             next()
         }
