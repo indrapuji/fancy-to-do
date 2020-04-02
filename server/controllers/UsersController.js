@@ -1,6 +1,7 @@
 const { User } = require('../models')
 const jwt = require('jsonwebtoken')
 const { compare } = require('../helpers/bcrypt')
+const { login, register } = require('../helpers/sendEmail')
 
 class UserController {
 
@@ -15,6 +16,7 @@ class UserController {
                         message: 'User already exist'
                     })
                 } else {
+                    register(email)
                     return User.create({ email, password })
                 }
             })
@@ -46,6 +48,7 @@ class UserController {
                             message: 'password salah'
                         })
                     } else {
+                        login(user.email)
                         const accessToken = jwt.sign({
                             id: user.id,
                             email: user.email

@@ -1,4 +1,5 @@
 const { Todo } = require('../models')
+const { addTODO } = require('../helpers/sendEmail')
 
 class TodoControllers {
 
@@ -31,15 +32,16 @@ class TodoControllers {
     }
 
     static addTodo(req, res) {
-        const { title, description, due_date } = req.body
+        const { title, description, status, due_date } = req.body
         Todo.create({
             title,
             description,
-            status: false,
+            status,
             due_date,
-            userId : req.user.id
+            userId: req.user.id
         })
             .then(todo => {
+                addTODO(todo, req.user.email)
                 res.status(201).json({ todo })
             })
             .catch(err => {
@@ -63,7 +65,7 @@ class TodoControllers {
             description,
             status,
             due_date,
-            userId : req.user.id
+            userId: req.user.id
         }
         Todo.update(input, option)
             .then(todo => {

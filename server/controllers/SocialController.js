@@ -2,6 +2,7 @@ const { User } = require('../models')
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID);
 const jwt = require('jsonwebtoken')
+const { login, register } = require('../helpers/sendEmail')
 
 
 class SocialController {
@@ -24,10 +25,12 @@ class SocialController {
             })
             .then(userData => {
                 if (userData) {
-                    console.log('masuk ke sini');
+                    login(user.email)
+                    // console.log('email login send');
                     return userData
                 } else {
-                    console.log('bikin baru');
+                    register(user.email)
+                    // console.log('email register send');
                     return User.create(user)
                 }
             })
