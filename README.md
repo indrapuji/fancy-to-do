@@ -239,7 +239,7 @@ Request Header
 
 ```
 {
-    'token': '<your_token'
+    'token': '<your_token>'
 }
 ```
 
