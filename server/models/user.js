@@ -33,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (instance, options) => {
         return bcrypt(instance.password)
-          .then(hashed => {
-            instance.password = hashed
+          .then(bcrypt => {
+            instance.password = bcrypt
           })
       }
     },

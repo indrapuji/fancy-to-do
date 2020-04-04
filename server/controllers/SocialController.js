@@ -1,7 +1,7 @@
-const { User } = require('../models')
-const { OAuth2Client } = require('google-auth-library');
-const client = new OAuth2Client(process.env.CLIENT_ID);
 const jwt = require('jsonwebtoken')
+const { User } = require('../models')
+const { OAuth2Client } = require('google-auth-library')
+const client = new OAuth2Client(process.env.CLIENT_ID)
 const { login, register } = require('../helpers/sendEmail')
 
 
@@ -16,7 +16,7 @@ class SocialController {
         })
             .then(googleData => {
                 const payload = googleData.getPayload()
-                // console.log(payload);
+                // console.log(payload)
                 user.email = payload.email
                 user.password = process.env.SECRET_PASSWORD
                 // console.log(user);
@@ -35,11 +35,12 @@ class SocialController {
                 }
             })
             .then(user => {
+                console.log(user.email);
                 const accessToken = jwt.sign({
                     id: user.id,
                     email: user.email
                 }, process.env.SECRET)
-                res.status(201).json({ accessToken })
+                res.status(201).json({ email: user.email, accessToken })
             })
             .catch(err => {
                 res.status(500).json(err)

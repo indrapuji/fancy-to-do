@@ -7,7 +7,7 @@ class TodoControllers {
         let option = { where: { userId: req.user.id } }
         Todo.findAll(option)
             .then(todos => {
-                res.status(200).json({ todos: todos })
+                res.status(200).json(todos)
             })
             .catch(err => {
                 res.status(500).json(err)
@@ -19,10 +19,10 @@ class TodoControllers {
         Todo.findOne(option)
             .then(todo => {
                 if (todo) {
-                    res.status(200).json({ todo: todo })
+                    res.status(200).json(todo)
                 } else {
                     res.status(404).json({
-                        message: 'error not found'
+                        message: 'Task not found'
                     })
                 }
             })
@@ -32,17 +32,17 @@ class TodoControllers {
     }
 
     static addTodo(req, res) {
-        const { title, description, status, due_date } = req.body
+        const { title, description, due_date } = req.body
         Todo.create({
             title,
             description,
-            status,
+            status: 'incomplete',
             due_date,
             userId: req.user.id
         })
             .then(todo => {
                 addTODO(todo, req.user.email)
-                res.status(201).json({ todo })
+                res.status(201).json(todo)
             })
             .catch(err => {
                 if (err.errors) {
@@ -73,7 +73,7 @@ class TodoControllers {
                     res.status(200).json(input)
                 } else {
                     res.status(404).json({
-                        message: 'data not found'
+                        message: 'Task not found'
                     })
                 }
             })
@@ -92,15 +92,23 @@ class TodoControllers {
 
     static deleteTodo(req, res) {
         const option = { where: { id: req.params.id } }
-        Todo.destroy(option)
-            .then(todo => {
-                if (todo) {
-                    res.status(200).json({ todo: todo })
-                } else {
+        let deleteData = null
+        Todo.findOne(option)
+            .then(data => {
+                if (!data) {
                     res.status(404).json({
-                        message: 'error not found'
+                        message: 'Task Not Found'
                     })
+                } else {
+                    deleteData = data
+                    return Todo.destroy(option)
                 }
+            })
+            .then(() => {
+                res.status(200).json({
+                    deleteData,
+                    message: 'Has been Deleted'
+                })
             })
             .catch(err => {
                 res.status(500).json(err)

@@ -1,5 +1,5 @@
-const { User } = require('../models')
 const jwt = require('jsonwebtoken')
+const { User } = require('../models')
 const { compare } = require('../helpers/bcrypt')
 const { login, register } = require('../helpers/sendEmail')
 
@@ -11,7 +11,6 @@ class UserController {
         User.findOne(option)
             .then(data => {
                 if (data) {
-                    console.log(data);
                     res.status(400).json({
                         message: 'User already exist'
                     })
@@ -25,7 +24,7 @@ class UserController {
                     id: user.id,
                     email: user.email
                 }, process.env.SECRET)
-                res.status(201).json({ accessToken })
+                res.status(201).json({ email, accessToken })
             })
             .catch(err => {
                 res.status(500).json(err)
@@ -38,23 +37,21 @@ class UserController {
         User.findOne(option)
             .then(user => {
                 if (!user) {
-                    res.status(400).json({
+                    res.status(404).json({
                         message: 'email tidak terdaftar'
                     })
                 } else {
-                    const isPasswordValid = compare(password, user.password)
-                    if (!isPasswordValid) {
-                        res.status(400).json({
-                            message: 'password salah'
-                        })
-                    } else {
+                    if (compare(password, user.password)) {
                         login(user.email)
                         const accessToken = jwt.sign({
                             id: user.id,
                             email: user.email
                         }, process.env.SECRET)
-                        console.log(accessToken);
-                        res.status(201).json({ accessToken })
+                        res.status(201).json({ email, accessToken })
+                    } else {
+                        res.status(400).json({
+                            message: 'password salah'
+                        })
                     }
                 }
             })
