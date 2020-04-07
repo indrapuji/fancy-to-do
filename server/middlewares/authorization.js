@@ -10,17 +10,18 @@ const authorization = function (req, res, next) {
                     message: 'Todo not found'
                 })
             } else {
-                if (data.userId === req.user.id) {
-                    next()
-                } else {
+                if (data.userId !== req.user.id) {
                     res.status(400).json({
                         message: 'forbiden access'
                     })
                 }
             }
+            next()
         })
         .catch(err => {
-            res.status(500).json(err)
+            res.status(500).json({
+                message: 'Internal server Error'
+            })
         })
 }
 

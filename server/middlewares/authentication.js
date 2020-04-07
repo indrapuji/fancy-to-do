@@ -1,17 +1,22 @@
 const jwt = require('jsonwebtoken')
+const { User } = require('../models')
 
 const authentication = function (req, res, next) {
     try {
         const { token } = req.headers
-        if (!token) {
-            res.status(404).json({
-                message: 'token not found'
+        const decoded = jwt.verify(token, process.env.SECRET)
+        req.user = decoded
+        let email = req.user.email
+        User.findOne({ where: { email } })
+            .then(user => {
+                if (user) {
+                    next()
+                } else {
+                    res.status(404).json({
+                        message: 'User not found'
+                    })
+                }
             })
-        } else {
-            const decoded = jwt.verify(token, process.env.SECRET)
-            req.user = decoded
-            next()
-        }
     } catch (error) {
         res.status(400).json({
             message: 'forbidden access'

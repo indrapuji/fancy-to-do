@@ -7,14 +7,15 @@
 - RESTful endpoint for asset's CRUD operation
 - JSON formatted response
 
-Postman Documentation
-For a more precise request of a certain status, check link below Link to postman documentations: https://documenter.getpostman.com/view/10620591/SzYbxwWw
+Postman Documentation  
+For more precise request status check link below
+<https://documenter.getpostman.com/view/10620591/SzYbxwWw>
 
 ### RESTful endpoints
 
 **_POST /register_**
 
-Sign up account
+> Sign up account
 
 Request Header
 
@@ -24,7 +25,7 @@ Request Header
 }
 ```
 
-Response Status 201
+Response Status (201 - Created)
 
 ```
 {
@@ -33,7 +34,7 @@ Response Status 201
 }
 ```
 
-Response Status 400
+Response Status (400 - Bad Request)
 
 ```
 {
@@ -41,9 +42,17 @@ Response Status 400
 }
 ```
 
+Response Status (500 - Internal Server Error)
+
+```
+{
+  "message": "Internal server Error"
+}
+```
+
 **_POST /login_**
 
-Sign in account
+> Sign in account
 
 Request Header
 
@@ -53,7 +62,7 @@ Request Header
 }
 ```
 
-Response Status 201
+Response Status (201 - OK)
 
 ```
 {
@@ -62,7 +71,7 @@ Response Status 201
 }
 ```
 
-Response Status 400
+Response Status (400 - Bad Request)
 
 ```
 {
@@ -70,7 +79,7 @@ Response Status 400
 }
 ```
 
-Response Status 404
+Response Status (404 - Not Found)
 
 ```
 {
@@ -78,9 +87,17 @@ Response Status 404
 }
 ```
 
+Response Status (500 - Internal Server Error)
+
+```
+{
+  "message": "Internal server Error"
+}
+```
+
 **_POST /todos_**
 
-Add Todo
+> Add Todo
 
 Request Header
 
@@ -90,7 +107,7 @@ Request Header
 }
 ```
 
-Response Status 201
+Response Status (201 - Created)
 
 ```
 {
@@ -105,9 +122,34 @@ Response Status 201
 }
 ```
 
+Response Status (400 - Bad Request)
+
+```
+[
+  {
+    "message": "Title cannot be empty"
+  },
+  {
+    "message": "Description cannot be empty"
+  },
+  {
+    "message": "Due date cannot be empty"
+  }
+]
+```
+
+Response Status (500 - Internal Server Error)
+
+```
+{
+  "message": "Internal server Error"
+}
+```
+
+
 **_GET /todos_**
 
-Get all todo
+> Get all todo
 
 Request Header
 
@@ -117,7 +159,7 @@ Request Header
 }
 ```
 
-Response Status 200
+Response Status (200 - OK)
 
 ```
 [
@@ -164,9 +206,17 @@ Response Status 200
 ]
 ```
 
-**_GET /todos/2_**
+Response Status (500 - Internal Server Error)
 
-Get todo by Id
+```
+{
+  "message": "Internal server Error"
+}
+```
+
+**_GET /todos/:id_**
+
+> Get todo by Id
 
 Request Header
 
@@ -176,7 +226,7 @@ Request Header
 }
 ```
 
-Response Status 200
+Response Status (200 - OK)
 
 ```
 {
@@ -191,7 +241,7 @@ Response Status 200
 }
 ```
 
-Response Status 404
+Response Status (404 - Bad Request)
 
 ```
 {
@@ -199,9 +249,17 @@ Response Status 404
 }
 ```
 
-**_PUT /todos/2_**
+Response Status (500 - Internal Server Error)
 
-Edit todo
+```
+{
+  "message": "Internal server Error"
+}
+```
+
+**_PUT /todos/:id_**
+
+> Edit todo
 
 Request Header
 
@@ -211,7 +269,7 @@ Request Header
 }
 ```
 
-Response Status 200
+Response Status (200 - Success)
 
 ```
 {
@@ -223,7 +281,25 @@ Response Status 200
 }
 ```
 
-Response Status 404
+Response Status (400 - Bad Request)
+```
+[
+    {
+        "message": "Title cannot be empty"
+    },
+    {
+        "message": "Description cannot be empty"
+    },
+    {
+        "message": "Status cannot be empty"
+    },
+    {
+        "message": "Due date cannot be empty"
+    }
+]
+```
+
+Response Status (404 - Not Found)
 
 ```
 {
@@ -231,9 +307,17 @@ Response Status 404
 }
 ```
 
-**_DELETE /todos/2_**
+Response Status (500 - Internal Server Error)
 
-Delete todo
+```
+{
+  "message": "Internal server Error"
+}
+```
+
+**_DELETE /todos/:id_**
+
+> Delete todo
 
 Request Header
 
@@ -243,7 +327,7 @@ Request Header
 }
 ```
 
-Response Status 200
+Response Status (200 - OK)
 
 ```
 {
@@ -261,10 +345,18 @@ Response Status 200
 }
 ```
 
-Response Status 404
+Response Status (404 - Bad Request)
 
 ```
 {
     "message": "Todo not found"
+}
+```
+
+Response Status (500 - Internal Server Error)
+
+```
+{
+  "message": "Internal server Error"
 }
 ```

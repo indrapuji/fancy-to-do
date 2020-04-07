@@ -27,7 +27,9 @@ class UserController {
                 res.status(201).json({ email, accessToken })
             })
             .catch(err => {
-                res.status(500).json(err)
+                res.status(500).json({
+                    message: 'Internal server Error'
+                })
             })
     }
 
@@ -38,7 +40,7 @@ class UserController {
             .then(user => {
                 if (!user) {
                     res.status(404).json({
-                        message: 'email tidak terdaftar'
+                        message: 'Email tidak terdaftar'
                     })
                 } else {
                     if (compare(password, user.password)) {
@@ -50,13 +52,15 @@ class UserController {
                         res.status(201).json({ email, accessToken })
                     } else {
                         res.status(400).json({
-                            message: 'password salah'
+                            message: 'Password salah'
                         })
                     }
                 }
             })
             .catch(err => {
-                res.status(500).json(err)
+                res.status(500).json({
+                    message: 'Internal server Error'
+                })
             })
     }
 

@@ -6,7 +6,6 @@ if (localStorage.getItem('accessToken')) {
 
 // register
 function registerForm() {
-  $('#error').html('')
   $('#login').hide()
   $('#register').show()
   $('#navbar').hide()
@@ -15,7 +14,6 @@ function registerForm() {
 
 // login
 function loginForm() {
-  $('#error').html('')
   $('#login').show()
   $('#register').hide()
   $('#navbar').hide()
@@ -85,11 +83,23 @@ $('#form-sign-in').on('submit', function (e) {
     .done(data => {
       localStorage.setItem('accessToken', data.accessToken)
       localStorage.setItem('email', data.email)
-      $('#error').html('')
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: `Welcome ${data.email}`,
+        showConfirmButton: false,
+        timer: 1000
+      })
       home()
     })
     .fail(err => {
-      $('#error').html(`<div class="alert alert-danger" role="alert">${err.responseJSON.message}</div>`)
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: `${err.responseJSON.message}`,
+        showConfirmButton: false,
+        timer: 1000
+      })
     })
 })
 
@@ -107,6 +117,13 @@ function onSignIn(googleUser) {
       console.log(data);
       localStorage.setItem('accessToken', data.accessToken)
       localStorage.setItem('email', data.email)
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: `Welcome ${data.email}`,
+        showConfirmButton: false,
+        timer: 1000
+      })
       home()
     })
 }
@@ -126,11 +143,23 @@ $('#form-register').on('submit', function (e) {
     .done(data => {
       localStorage.setItem('accessToken', data.accessToken)
       localStorage.setItem('email', data.email)
-      $('#error').html('')
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: `${data.email} has been create`,
+        showConfirmButton: false,
+        timer: 1500
+      })
       home()
     })
     .fail(err => {
-      $('#error').html(`<div class="alert alert-danger" role="alert">${err.responseJSON.message}</div>`)
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: `${err.responseJSON.message}`,
+        showConfirmButton: false,
+        timer: 1000
+      })
     })
 })
 
@@ -138,6 +167,13 @@ $('#form-register').on('submit', function (e) {
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
+    Swal.fire({
+      position: 'top',
+      icon: 'success',
+      title: `Dont forget to come back`,
+      showConfirmButton: false,
+      timer: 1500
+    })
     console.log('User signed out.');
     localStorage.clear();
     login()
@@ -170,7 +206,7 @@ function editStatus(id) {
       }
     }).done(() => {
       home();
-    });
+    })
   });
 }
 
@@ -191,12 +227,25 @@ $('#add-todo').on('submit', function (e) {
     }
   })
     .done(response => {
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: `${response.title} has been added`,
+        showConfirmButton: false,
+        timer: 1500
+      })
       $('#add-todo')[0].reset();
       $('#exampleModal').modal('toggle');
       home();
     })
     .fail(err => {
-      console.log(err)
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: `Input field cannot be empty`,
+        showConfirmButton: false,
+        timer: 1000
+      })
     });
 });
 
@@ -215,9 +264,9 @@ function todoEdit(id) {
     $('#edit-todo').on('submit', function (e) {
       e.preventDefault();
       let input = {
-        title : $('#title-edit').val(),
-        description : $('#description-edit').val(),
-        due_date : $('#date-edit').val()
+        title: $('#title-edit').val(),
+        description: $('#description-edit').val(),
+        due_date: $('#date-edit').val()
       }
       $.ajax({
         type: 'PUT',
@@ -227,24 +276,49 @@ function todoEdit(id) {
           token: localStorage.getItem('accessToken')
         }
       }).done(() => {
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: `${response.title} has been edit`,
+          showConfirmButton: false,
+          timer: 2000
+        })
         $('#edit-todo')[0].reset();
         $('#modalContactForm').modal('toggle');
         home();
-      });
+      })
     });
-  });
+  })
 }
 
 // DELETE TODO
 function todoDelete(id) {
-  $.ajax({
-    type: 'DELETE',
-    url: 'http://localhost:3000/todos' + '/' + id,
-    headers: {
-      token: localStorage.getItem('accessToken')
-    }
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
   })
-    .done(() => {
-      home()
+    .then((result) => {
+      if (result.value) {
+        $.ajax({
+          type: 'DELETE',
+          url: 'http://localhost:3000/todos' + '/' + id,
+          headers: {
+            token: localStorage.getItem('accessToken')
+          }
+        })
+          .done(() => {
+            home()
+          })
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
     })
 }

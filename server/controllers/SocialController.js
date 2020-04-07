@@ -16,26 +16,21 @@ class SocialController {
         })
             .then(googleData => {
                 const payload = googleData.getPayload()
-                // console.log(payload)
                 user.email = payload.email
                 user.password = process.env.SECRET_PASSWORD
-                // console.log(user);
                 let option = { where: { email: user.email } }
                 return User.findOne(option)
             })
             .then(userData => {
                 if (userData) {
                     login(user.email)
-                    // console.log('email login send');
                     return userData
                 } else {
                     register(user.email)
-                    // console.log('email register send');
                     return User.create(user)
                 }
             })
             .then(user => {
-                console.log(user.email);
                 const accessToken = jwt.sign({
                     id: user.id,
                     email: user.email
@@ -43,7 +38,9 @@ class SocialController {
                 res.status(201).json({ email: user.email, accessToken })
             })
             .catch(err => {
-                res.status(500).json(err)
+                res.status(500).json({
+                    message: 'Internal server Error'
+                })
             })
     }
 }
