@@ -8,7 +8,7 @@
 - JSON formatted response
 
 Postman Documentation  
-For more precise request status check link below
+For more precise request status check link below  
 <https://documenter.getpostman.com/view/10620591/SzYbxwWw>
 
 ### RESTful endpoints
