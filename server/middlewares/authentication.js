@@ -6,8 +6,7 @@ const authentication = function (req, res, next) {
         const { token } = req.headers
         const decoded = jwt.verify(token, process.env.SECRET)
         req.user = decoded
-        let email = req.user.email
-        User.findOne({ where: { email } })
+        User.findOne({ where: { email: req.user.email } })
             .then(user => {
                 if (user) {
                     next()

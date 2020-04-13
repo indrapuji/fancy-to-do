@@ -7,23 +7,20 @@
 - RESTful endpoint for asset's CRUD operation
 - JSON formatted response
 
+## REST API endpoints
+> ### <https://server-todoapp-13042020.herokuapp.com>  
+
 Postman Documentation  
 For more precise request status check link below  
 <https://documenter.getpostman.com/view/10620591/SzYbxwWw>
+
 
 ### RESTful endpoints
 
 **_POST /register_**
 
-> Sign up account
-
-Request Header
-
-```
-{
-    "Content-Type": "application/json"
-}
-```
+> Register new account  
+> (after register you will go to app)
 
 Response Status (201 - Created)
 

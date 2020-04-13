@@ -28,7 +28,7 @@ function home() {
   $('#add-todo')[0].reset()
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/todos',
+    url: 'https://server-todoapp-13042020.herokuapp.com/todos',
     headers: {
       token: localStorage.getItem('accessToken')
     }
@@ -77,7 +77,7 @@ $('#form-sign-in').on('submit', function (e) {
   }
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:3000/login',
+    url: 'https://server-todoapp-13042020.herokuapp.com/login',
     data: input
   })
     .done(data => {
@@ -108,7 +108,7 @@ function onSignIn(googleUser) {
   var id_token = googleUser.getAuthResponse().id_token;
   $.ajax({
     method: 'POST',
-    url: 'http://localhost:3000/google-signin',
+    url: 'https://server-todoapp-13042020.herokuapp.com/google-signin',
     data: {
       token: id_token
     }
@@ -137,7 +137,7 @@ $('#form-register').on('submit', function (e) {
   }
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:3000/register',
+    url: 'https://server-todoapp-13042020.herokuapp.com/register',
     data: input
   })
     .done(data => {
@@ -167,13 +167,6 @@ $('#form-register').on('submit', function (e) {
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
-    Swal.fire({
-      position: 'top',
-      icon: 'success',
-      title: `Dont forget to come back`,
-      showConfirmButton: false,
-      timer: 1500
-    })
     console.log('User signed out.');
     localStorage.clear();
     login()
@@ -184,7 +177,7 @@ function signOut() {
 function editStatus(id) {
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/todos' + '/' + id,
+    url: 'https://server-todoapp-13042020.herokuapp.com/todos' + '/' + id,
     headers: {
       token: localStorage.getItem('accessToken')
     }
@@ -199,7 +192,7 @@ function editStatus(id) {
     let inputData = { status };
     $.ajax({
       type: 'PUT',
-      url: 'http://localhost:3000/todos' + '/' + id,
+      url: 'https://server-todoapp-13042020.herokuapp.com/todos' + '/' + id,
       data: inputData,
       headers: {
         token: localStorage.getItem('accessToken')
@@ -220,7 +213,7 @@ $('#add-todo').on('submit', function (e) {
   }
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:3000/todos',
+    url: 'https://server-todoapp-13042020.herokuapp.com/todos',
     data: input,
     headers: {
       token: localStorage.getItem('accessToken')
@@ -253,7 +246,7 @@ $('#add-todo').on('submit', function (e) {
 function todoEdit(id) {
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/todos' + "/" + id,
+    url: 'https://server-todoapp-13042020.herokuapp.com/todos' + "/" + id,
     headers: {
       token: localStorage.getItem('accessToken')
     }
@@ -270,7 +263,7 @@ function todoEdit(id) {
       }
       $.ajax({
         type: 'PUT',
-        url: 'http://localhost:3000/todos' + '/' + id,
+        url: 'https://server-todoapp-13042020.herokuapp.com/todos' + '/' + id,
         data: input,
         headers: {
           token: localStorage.getItem('accessToken')
@@ -306,7 +299,7 @@ function todoDelete(id) {
       if (result.value) {
         $.ajax({
           type: 'DELETE',
-          url: 'http://localhost:3000/todos' + '/' + id,
+          url: 'https://server-todoapp-13042020.herokuapp.com/todos' + '/' + id,
           headers: {
             token: localStorage.getItem('accessToken')
           }

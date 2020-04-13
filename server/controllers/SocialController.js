@@ -16,6 +16,7 @@ class SocialController {
         })
             .then(googleData => {
                 const payload = googleData.getPayload()
+                console.log(payload);
                 user.email = payload.email
                 user.password = process.env.SECRET_PASSWORD
                 let option = { where: { email: user.email } }
