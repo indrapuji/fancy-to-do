@@ -53,7 +53,6 @@ class TodoControllers {
                     let errData = []
                     for (let i = 0; i < err.errors.length; i++) {
                         errData.push({ message: err.errors[i].message })
-                        console.log(err);
                     }
                     res.status(400).json(errData)
                 } else {

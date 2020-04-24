@@ -40,7 +40,7 @@ class UserController {
             .then(user => {
                 if (!user) {
                     res.status(404).json({
-                        message: 'Email tidak terdaftar'
+                        message: 'Email not found'
                     })
                 } else {
                     if (compare(password, user.password)) {
@@ -52,7 +52,7 @@ class UserController {
                         res.status(201).json({ email, accessToken })
                     } else {
                         res.status(400).json({
-                            message: 'Password salah'
+                            message: 'Wrong password'
                         })
                     }
                 }

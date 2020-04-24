@@ -6,9 +6,22 @@
 
 - RESTful endpoint for asset's CRUD operation
 - JSON formatted response
+---
 
-## REST API endpoints
+### Response Formats  
+The default response format is JSON
+```
+application/json
+```  
+### Authentication  
+```
+access_token  
+```
+---
+## Routes
+All routes need to be prefixed with
 > ### <https://server-todoapp-13042020.herokuapp.com>  
+---  
 
 Postman Documentation  
 For more precise request status check link below  
@@ -20,13 +33,21 @@ For more precise request status check link below
 **_POST /register_**
 
 > Register new account  
-> (after register you will go to app)
+> (after register will automatic login)
+
+Request Body  
+```
+{
+    email: String
+    password: String
+}
+```
 
 Response Status (201 - Created)
 
 ```
 {
-  "email": "indrapujinovirwan@gmail.com",
+  "email": "<email>",
   "accessToken": "<your_token>"
 }
 ```
@@ -49,13 +70,21 @@ Response Status (500 - Internal Server Error)
 
 **_POST /login_**
 
-> Sign in account
+> Sign in account  
+
+Request Body  
+```
+{
+    email: String
+    password: String
+}
+```
 
 Request Header
 
 ```
 {
-    'accessToken': '<your_token>'
+    "accessToken": "<your_token>"
 }
 ```
 
@@ -63,7 +92,7 @@ Response Status (201 - OK)
 
 ```
 {
-    "email": "indrapujinovirwan@gmail.com",
+    "email": "<email>",
     "accessToken": "<your_token>"
 }
 ```
@@ -72,7 +101,7 @@ Response Status (400 - Bad Request)
 
 ```
 {
-    "message": "password salah"
+    "message": "wrong password"
 }
 ```
 
@@ -80,7 +109,7 @@ Response Status (404 - Not Found)
 
 ```
 {
-    "message": "email tidak terdaftar"
+    "message": "email not found"
 }
 ```
 
@@ -100,7 +129,16 @@ Request Header
 
 ```
 {
-    'token': '<your_token'
+    "accessToken": "<your_token>"
+}
+```
+
+Request Body  
+```
+{
+    title: String
+    description: String
+    due_date: String
 }
 ```
 
@@ -109,13 +147,11 @@ Response Status (201 - Created)
 ```
 {
     "id": 1,
-    "title": "Menambahkan task",
-    "description": "menambahkan task baru",
-    "status": "incomplete",
-    "due_date": "04-04-2020",
-    "userId": 1,
-    "updatedAt": "2020-04-04T05:59:17.581Z",
-    "createdAt": "2020-04-04T05:59:17.581Z"
+    "title": "title",
+    "description": "description",
+    "status": "status",
+    "due_date": "date",
+    "userId": 1
 }
 ```
 
@@ -152,7 +188,7 @@ Request Header
 
 ```
 {
-    'token': '<your_token'
+    "accessToken": "<your_token>"
 }
 ```
 
@@ -162,42 +198,26 @@ Response Status (200 - OK)
 [
     {
         "id": 1,
-        "title": "Menambahkan task",
-        "description": "menambahkan task baru",
-        "status": "incomplete",
-        "due_date": "04-04-2020",
-        "createdAt": "2020-04-04T05:59:17.581Z",
-        "updatedAt": "2020-04-04T05:59:17.581Z",
+        "title": "title",
+        "description": "description",
+        "status": "status",
+        "due_date": "date",
         "userId": 1
     },
     {
         "id": 2,
-        "title": "Menambahkan task ke 2",
-        "description": "menambahkan task baru yang ke 2",
-        "status": "incomplete",
-        "due_date": "04-04-2020",
-        "createdAt": "2020-04-04T06:00:35.732Z",
-        "updatedAt": "2020-04-04T06:00:35.732Z",
+        "title": "title",
+        "description": "description",
+        "status": "status",
+        "due_date": "date",
         "userId": 1
     },
     {
         "id": 3,
-        "title": "Menambahkan task ke 3",
-        "description": "menambahkan task baru yang ke 3",
-        "status": "incomplete",
-        "due_date": "04-04-2020",
-        "createdAt": "2020-04-04T06:00:43.895Z",
-        "updatedAt": "2020-04-04T06:00:43.895Z",
-        "userId": 1
-    },
-    {
-        "id": 4,
-        "title": "Menambahkan task ke 4",
-        "description": "menambahkan task baru yang ke 4",
-        "status": "incomplete",
-        "due_date": "04-04-2020",
-        "createdAt": "2020-04-04T06:00:51.332Z",
-        "updatedAt": "2020-04-04T06:00:51.332Z",
+        "title": "title",
+        "description": "description",
+        "status": "status",
+        "due_date": "date",
         "userId": 1
     }
 ]
@@ -219,7 +239,7 @@ Request Header
 
 ```
 {
-    'token': '<your_token'
+    "accessToken": "<your_token>"
 }
 ```
 
@@ -227,13 +247,11 @@ Response Status (200 - OK)
 
 ```
 {
-    "id": 2,
-    "title": "Menambahkan task ke 2",
-    "description": "menambahkan task baru yang ke 2",
-    "status": "incomplete",
-    "due_date": "04-04-2020",
-    "createdAt": "2020-04-04T06:00:35.732Z",
-    "updatedAt": "2020-04-04T06:00:35.732Z",
+    "id": id,
+    "title": "title",
+    "description": "description",
+    "status": "status",
+    "due_date": "date",
     "userId": 1
 }
 ```
@@ -262,7 +280,16 @@ Request Header
 
 ```
 {
-    'token': '<your_token'
+    "accessToken": "<your_token>"
+}
+```
+
+Request Body  
+```
+{
+    title: String
+    description: String
+    due_date: String
 }
 ```
 
@@ -270,10 +297,10 @@ Response Status (200 - Success)
 
 ```
 {
-    "title": "Menambahkan task ke 2",
-    "description": "menambahkan task baru yang ke 2",
-    "status": "complete",
-    "due_date": "04-04-2020",
+    "title": "new title",
+    "description": "new description",
+    "status": "new status",
+    "due_date": "new date",
     "userId": 1
 }
 ```
@@ -320,7 +347,7 @@ Request Header
 
 ```
 {
-    'token': '<your_token>'
+    "accessToken": "<your_token>"
 }
 ```
 
@@ -329,13 +356,11 @@ Response Status (200 - OK)
 ```
 {
     "deleteData": {
-        "id": 3,
-        "title": "Menambahkan task ke 3",
-        "description": "menambahkan task baru yang ke 3",
-        "status": "incomplete",
-        "due_date": "04-04-2020",
-        "createdAt": "2020-04-04T06:00:43.895Z",
-        "updatedAt": "2020-04-04T06:00:43.895Z",
+        "id": 1,
+        "title": "title",
+        "description": "description",
+        "status": "status",
+        "due_date": "date",
         "userId": 1
     },
     "message": "Has been Deleted"
