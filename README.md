@@ -23,12 +23,29 @@ All routes need to be prefixed with
 > ### <https://server-todoapp-13042020.herokuapp.com>  
 ---  
 
+
+These are the routes/endpoints this API has:  
+| HTTP Method | Route           | Overview                    |
+| :---------- | :-------------- | :-------------------------- |
+| POST        | /register       | Register new account        |
+| POST        | /login          | Sign-in account             |
+| POST        | //google-signin | Sign-in with google account |
+| POST        | /todos          | Add new Todo                |
+| GET         | /todos          | Get all todo                |
+| GET         | /todos/:id      | Get todo by id              |
+| PUT         | /todos/:id      | Update todo                 |
+| DELETE      | /todos/:id      | Delete todo                 |
+
+---
+
 Postman Documentation  
 For more precise request status check link below  
 <https://documenter.getpostman.com/view/10620591/SzYbxwWw>
 
 
+
 ### RESTful endpoints
+#### Breakdown
 
 **_POST /register_**
 
@@ -118,6 +135,26 @@ Response Status (500 - Internal Server Error)
 ```
 {
   "message": "Internal server Error"
+}
+```
+
+**_POST /google-signin_**
+
+> Sign in account  
+
+Request Body  
+```
+{
+    "google_token": "your google token"
+}
+```
+
+Response Status (201 - OK)
+
+```
+{
+    "email": "<email>",
+    "accessToken": "<your_token>"
 }
 ```
 

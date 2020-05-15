@@ -47,19 +47,19 @@
 
   <!-- LOGIN FORM -->
   <div id="login">
-    <form class="form-signin" id="form-sign-in">
-      <h3 class="h3 mb-3 font-weight-normal" style="text-align: center;"><strong>TODO APP</strong></h3>
-      <h5 style="text-align: center;"><strong>LOGIN</strong></h5>
+    <form id="form-sign-in">
+      <h3 class="formtitle"><strong>TODO APP</strong></h3>
+      <h5 class="formtitle"><strong>LOGIN</strong></h5>
       <input name="email" type="email" class="form-control mt-4" placeholder="email" id="emailLogin" />
-      <input type="password" class="form-control mt-2" placeholder="Password" name="password" id="passwordLogin" />
-      <button style="margin-top: 20px; " class="btn btn-lg btn-primary btn-block" type="submit" id="submit">Sign
+      <input name="password" type="password" class="form-control mt-2" placeholder="Password" id="passwordLogin" />
+      <button class="btn btn-lg btn-primary btn-block formbutton" type="submit" id="submit">Sign
         in</button>
       <div style="text-align: center; margin-top: 15px;">
         <h6>OR</h6>
         <div class="g-signin2" style="margin-top: 10px;margin-left: 100px;" data-onsuccess="onSignIn"></div>
       </div>
       <div class="sign-up" style="text-align: center; margin: 30px;"> Don't have an account? <a href=""
-          id="sign-up">Sign up here</a></div>
+          id="sign-up">Sign up</a>  here</div>
     </form>
   </div>
 
@@ -84,7 +84,6 @@
     <button type="button" class="btn btn-success" style="color: white;" data-toggle="modal" data-target="#exampleModal">
       Add Todo
     </button>
-
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
