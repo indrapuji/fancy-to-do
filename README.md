@@ -3,9 +3,22 @@
 ### by Indra Puji Novirwan
 
 #### Fancy To-do App is an application to manage your task.
-
 - RESTful endpoint for asset's CRUD operation
 - JSON formatted response
+
+## Link Demo
+> ### Backend <https://server-todoapp-13042020.herokuapp.com>  
+> ### Frontend <https://todoapps-1585737442889.web.app/>
+
+## Client and Server Documentation
+### Client
+> Stack : HTML, CSS, JAVASCRIPT, jQuery  
+### Server
+> Stack : Express, sequelize, postgresql
+### Third party
+> Google OAUTH  
+> @sendgrid/mail
+
 ---
 
 ### Response Formats  
@@ -18,11 +31,6 @@ application/json
 access_token  
 ```
 ---
-## Routes
-All routes need to be prefixed with
-> ### <https://server-todoapp-13042020.herokuapp.com>  
----  
-
 
 These are the routes/endpoints this API has:  
 | HTTP Method | Route           | Overview                    |
