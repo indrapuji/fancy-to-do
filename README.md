@@ -8,8 +8,8 @@
 
 ## Link Demo
 ```
-Backend <https://server-todoapp-13042020.herokuapp.com>  
-Frontend <https://todoapps-1585737442889.web.app/>
+Backend https://server-todoapp-13042020.herokuapp.com  
+Frontend https://todoapps-1585737442889.web.app  
 ```
 
 ## Client and Server Documentation
