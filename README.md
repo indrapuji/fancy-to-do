@@ -7,17 +7,25 @@
 - JSON formatted response
 
 ## Link Demo
-> ### Backend <https://server-todoapp-13042020.herokuapp.com>  
-> ### Frontend <https://todoapps-1585737442889.web.app/>
+```
+Backend <https://server-todoapp-13042020.herokuapp.com>  
+Frontend <https://todoapps-1585737442889.web.app/>
+```
 
 ## Client and Server Documentation
 ### Client
-> Stack : HTML, CSS, JAVASCRIPT, jQuery  
+```
+Stack : HTML, CSS, JAVASCRIPT, jQuery  
+```
 ### Server
-> Stack : Express, sequelize, postgresql
+```
+Stack : Express, sequelize, postgresql
+```
 ### Third party
-> Google OAUTH  
-> @sendgrid/mail
+```
+Google OAUTH  
+@sendgrid/mail
+```
 
 ---
 
@@ -45,13 +53,11 @@ These are the routes/endpoints this API has:
 | DELETE      | /todos/:id      | Delete todo                 |
 
 ---
-
+```
 Postman Documentation  
 For more precise request status check link below  
 <https://documenter.getpostman.com/view/10620591/SzYbxwWw>
-
-
-
+```
 ### RESTful endpoints
 #### Breakdown
 
